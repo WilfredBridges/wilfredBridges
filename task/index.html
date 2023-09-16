@@ -28,10 +28,13 @@
             </tr>
             <tr class="api-info">
                 <td>1.Neighbouring countries:</td>
-                <td>Country:
-                    <input type="text" id="countryInput" placeholder="Country">
+                <td>
+                    <form id="countryForm">
+                        <input type="text" id="countryInput" name="country" placeholder="Enter Country Code">
+                        <button type="submit" id="fetchDataButton">Submit</button>
+                    </form>
                 </td>
-                <td><button id="fetchDataButton">Submit</button></td>
+                <td></td>
             </tr>
             <tr class="api-info">
                 <td>2.{name}</td>
@@ -44,7 +47,7 @@
                 <td><button>Submit</button></td>
             </tr>
             <tr id="results">
-                <td></td>
+                <td colspan="3"></td>
             </tr>
 
         </table>

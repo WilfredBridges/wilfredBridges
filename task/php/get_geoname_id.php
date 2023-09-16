@@ -4,7 +4,7 @@ $apiUsername = $_REQUEST['wilfredbridges'];
 
 if (isset($_POST['country'])) {
     $country = $_POST['country'];
-    $url = "http://api.geonames.org/neighboursJSON?geonameId=$country&username=$apiUsername";
+    $url = "http://api.geonames.org/searchJSON?q=$country&maxRows=1&username=$apiUsername";
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -15,7 +15,14 @@ if (isset($_POST['country'])) {
 
     curl_close($ch);
 
-    echo $result;
+    $data = json_decode($result, true);
+
+    if ($data && isset($data['geonames'][0]['geonameId'])) {
+        $geonameId = $data['geonames'][0]['geonameId'];
+        echo json_encode(['geonameId' => $geonameId]);
+    } else {
+        echo json_encode(['error' => 'GeonameId not found']);
+    }
 } else {
     echo json_encode(['error' => 'Country not specified']);
 }
