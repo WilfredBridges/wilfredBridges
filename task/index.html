@@ -27,9 +27,11 @@
                 <td></td>
             </tr>
             <tr class="api-info">
-                <td>1.{name}</td>
-                <td>description</td>
-                <td><button>Submit</button></td>
+                <td>1.Neighbouring countries:</td>
+                <td>Country:
+                    <input type="text" id="countryInput" placeholder="Country">
+                </td>
+                <td><button id="fetchDataButton">Submit</button></td>
             </tr>
             <tr class="api-info">
                 <td>2.{name}</td>
@@ -40,6 +42,9 @@
                 <td>3.{name}</td>
                 <td>description</td>
                 <td><button>Submit</button></td>
+            </tr>
+            <tr id="results">
+                <td></td>
             </tr>
 
         </table>
