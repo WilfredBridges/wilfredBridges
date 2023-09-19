@@ -7,7 +7,7 @@ $(document).ready(function () {
         $.ajax({
             type: 'POST',
             url: 'get_geoname_id.php',
-            data: { country: country },
+            data: { country: country, wilfredbridges: 'wilfredbridges' },
             success: function (data) {
                 console.log(data);
                 var geonameData = JSON.parse(data);
@@ -27,8 +27,8 @@ $(document).ready(function () {
         // Now, fetch data using the geonameId
         $.ajax({
             type: 'POST',
-            url: 'geonames.php',
-            data: { geonameId: geonameId },
+            url: 'php/geonames.php',
+            data: { geonameId: geonameId, wilfredbridges: 'wilfredbridges' },
             success: function (data) {
                 console.log(data);
                 displayResults(data);
@@ -41,12 +41,12 @@ $(document).ready(function () {
 
     function displayResults(data) {
         var resultHtml = '';
-        var neighbors = JSON.parse(data);
-
-        if (neighbors && neighbors.status && neighbors.status.code === '200') {
-            $.each(neighbors.geonames, function (index, neighbor) {
+        var response = JSON.parse(data);
+    
+        if (response.totalResultsCount > 0) {
+            $.each(response.geonames, function (index, neighbor) {
                 resultHtml += '<tr>';
-                resultHtml += '<td>' + (index + 1) + '. ' + neighbor.name + '</td>';
+                resultHtml += '<td>' + neighbor.asciiName + '</td>';
                 resultHtml += '<td>' + neighbor.countryName + '</td>';
                 resultHtml += '<td></td>';
                 resultHtml += '</tr>';
@@ -54,9 +54,10 @@ $(document).ready(function () {
         } else {
             resultHtml = '<tr><td colspan="3">No data available.</td></tr>';
         }
-
+    
         $('#results').html(resultHtml);
     }
+    
 
     // Preloader
     $(window).on('load', function () {

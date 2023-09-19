@@ -2,9 +2,9 @@
 
 $apiUsername = $_REQUEST['wilfredbridges'];
 
-if (isset($_POST['country'])) {
-    $country = $_POST['country'];
-    $url = "http://api.geonames.org/neighboursJSON?geonameId=$country&username=$apiUsername";
+if (isset($_POST['geonameId'])) {
+    $geonameId = $_POST['geonameId'];
+    $url = "http://api.geonames.org/neighboursJSON?formatted=true&geonameId=$geonameId&username=$apiUsername&style=full";
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
