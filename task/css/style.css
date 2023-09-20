@@ -1,7 +1,26 @@
-#table-header {
-    font-size: 2em;
+.api-info {
+    border-bottom: 1px solid #ddd;
 }
 
+.api-info td {
+    padding: 10px;
+}
+
+#fetchDataButton,
+#fetchCountryInfoButton,
+#fetchWeatherInfoButton {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+#fetchDataButton:hover,
+#fetchCountryInfoButton:hover,
+#fetchWeatherInfoButton:hover {
+    background-color: #0056b3;
+}
 
 
 #preloader {
