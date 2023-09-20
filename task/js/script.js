@@ -36,6 +36,14 @@ $(document).ready(function () {
         });
     });
 
+    // Third API call (Lattitude & Longitude)
+    $('#fetchLatLngButton').click(function () {
+        var countryName = $('#countryInput3').val();
+        fetchGeonameId(countryName, function (geonameId) {
+            fetchLatLng(geonameId);
+        });
+    });
+
     function fetchNeighbours(geonameId) {
         // Now, fetch data using the geonameId
         $.ajax({
@@ -64,6 +72,22 @@ $(document).ready(function () {
             },
             error: function () {
                 $('#countryRegionsResults').html('Error fetching data.');
+            }
+        });
+    }
+
+    function fetchLatLng(geonameId) {
+        // Fetch LatLng using the geonameId
+        $.ajax({
+            type: 'POST',
+            url: 'php/get_latlng.php',
+            data: { geonameId: geonameId, wilfredbridges: 'wilfredbridges' },
+            success: function (data) {
+                console.log(data);
+                displayLatLng(data);
+            },
+            error: function () {
+                $('#results').html('Error fetching data.');
             }
         });
     }
@@ -105,6 +129,24 @@ $(document).ready(function () {
 
         $('#countryRegionsResults').html(resultHtml);
     }
+
+    function displayLatLng(data) {
+        var resultHtml = '';
+        var response = JSON.parse(data);
+    
+        if (response.lat && response.lng) {
+            resultHtml += '<tr><td> Name: ' + response.asciiName + '</td></tr>';
+            resultHtml += '<tr><td> Code: ' + response.countryCode + '</td></tr>';
+            resultHtml += '<tr><td> Latitude: ' + response.lat + '</td></tr>';
+            resultHtml += '<tr><td> Longitude: ' + response.lng + '</td></tr>';
+        } else {
+            resultHtml = '<tr><td colspan="1">No data available.</td></tr>';
+        }
+    
+        $('#LatLngResult').html(resultHtml);
+    }
+    
+    
 
     // Preloader
     $(window).on('load', function () {

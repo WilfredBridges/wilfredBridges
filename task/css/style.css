@@ -7,8 +7,8 @@
 }
 
 #fetchDataButton,
-#fetchCountryInfoButton,
-#fetchWeatherInfoButton {
+ #fetchCountryRegionsButton,
+ #fetchLatLngButton{
     padding: 5px 10px;
     background-color: #007bff;
     color: #fff;
@@ -17,8 +17,8 @@
 }
 
 #fetchDataButton:hover,
-#fetchCountryInfoButton:hover,
-#fetchWeatherInfoButton:hover {
+#fetchCountryRegionsButton:hover,
+#fetchLatLngButton:hover {
     background-color: #0056b3;
 }
 
