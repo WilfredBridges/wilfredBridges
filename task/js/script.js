@@ -44,6 +44,14 @@ $(document).ready(function () {
         });
     });
 
+    // Fourth API call (Timezone)
+    $('#fetchTimezoneButton').click(function () {
+        var latitude = $('#LatInput').val();
+        var longitude = $('#LngInput').val();
+        fetchTimezone(latitude, longitude);
+    });
+
+
     function fetchNeighbours(geonameId) {
         // Now, fetch data using the geonameId
         $.ajax({
@@ -88,6 +96,22 @@ $(document).ready(function () {
             },
             error: function () {
                 $('#results').html('Error fetching data.');
+            }
+        });
+    }
+
+    // Function to fetch timezone
+    function fetchTimezone(latitude, longitude) {
+        $.ajax({
+            type: 'POST',
+            url: 'php/timezone.php',
+            data: { lat: latitude, lng: longitude, wilfredbridges: 'wilfredbridges' },
+            success: function (data) {
+                console.log(data);
+                displayTimezoneResults(data);
+            },
+            error: function () {
+                $('#timezoneResult').html('Error fetching timezone data.');
             }
         });
     }
@@ -144,6 +168,23 @@ $(document).ready(function () {
         }
     
         $('#LatLngResult').html(resultHtml);
+    }
+
+    function displayTimezoneResults(data) {
+        var resultHtml = '';
+        var response = JSON.parse(data);
+
+        if (response.countryName && response.time && response.gmtOffset) {
+            var gmtOffset = response.gmtOffset;
+            var eastzone = gmtOffset >= 0 ? 'GMT+' + gmtOffset : 'GMT' + gmtOffset;
+            resultHtml += '<tr><td> Country: ' + response.countryName + '</td></tr>';
+            resultHtml += '<tr><td> Time: ' + response.time + '</td></tr>';
+            resultHtml += '<tr><td> Timezone: ' + eastzone + '</td></tr>';
+        } else {
+            resultHtml = '<tr><td colspan="1">No data available.</td></tr>';
+        }
+
+        $('#timezoneResult').html(resultHtml);
     }
     
     

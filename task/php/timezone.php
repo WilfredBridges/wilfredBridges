@@ -19,15 +19,15 @@ if (isset($_POST['lat']) && isset($_POST['lng'])) {
 
     $data = json_decode($result, true);
 
-    if ($data && isset($data['countryName']) && isset($data['time']) && isset($data['timezoneId'])) {
+    if ($data && isset($data['countryName']) && isset($data['time']) && isset($data['gmtOffset'])) {
         $countryName = $data['countryName'];
         $time = $data['time'];
-        $timezone = $data['timezoneId'];
+        $timezone = $data['gmtOffset'];
         
         echo json_encode([
             'countryName' => $countryName,
             'time' => $time,
-            'timezone' => $timezone
+            'gmtOffset' => $timezone
         ]);
     } else {
         echo json_encode(['error' => 'Data not found in the API response']);
