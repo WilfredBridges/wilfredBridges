@@ -8,7 +8,8 @@
 
 #fetchDataButton,
  #fetchCountryRegionsButton,
- #fetchLatLngButton{
+ #fetchLatLngButton,
+ #fetchTimezoneButton{
     padding: 5px 10px;
     background-color: #007bff;
     color: #fff;
@@ -18,7 +19,8 @@
 
 #fetchDataButton:hover,
 #fetchCountryRegionsButton:hover,
-#fetchLatLngButton:hover {
+#fetchLatLngButton:hover,
+#fetchTimezoneButton:hover {
     background-color: #0056b3;
 }
 
