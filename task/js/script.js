@@ -121,6 +121,7 @@ $(document).ready(function () {
         var response = JSON.parse(data);
 
         if (response.totalResultsCount > 0) {
+            resultHtml += '<tr><td><h3> The selected country has a total of ' + response.totalResultsCount + ' neighbours.  </h3></td></tr>';
             $.each(response.geonames, function (index, neighbor) {
                 resultHtml += '<tr>';
                 resultHtml += '<td>' + neighbor.asciiName + '</td>';
@@ -140,6 +141,7 @@ $(document).ready(function () {
         var response = JSON.parse(data);
 
         if (response.totalResultsCount > 0) {
+            resultHtml += '<tr><td><h3> The following places can be found in the selected region </h3></td></tr>';
             $.each(response.geonames, function (index, region) {
                 resultHtml += '<tr>';
                 resultHtml += '<td>' + region.toponymName + '</td>';
@@ -159,6 +161,7 @@ $(document).ready(function () {
         var response = JSON.parse(data);
     
         if (response.lat && response.lng) {
+            resultHtml += '<tr><td><h3> The Latitude and Longitude information for ' + response.asciiName + ' is: </h3></td></tr>';
             resultHtml += '<tr><td> Name: ' + response.asciiName + '</td></tr>';
             resultHtml += '<tr><td> Code: ' + response.countryCode + '</td></tr>';
             resultHtml += '<tr><td> Latitude: ' + response.lat + '</td></tr>';
@@ -177,6 +180,7 @@ $(document).ready(function () {
         if (response.countryName && response.time && response.gmtOffset) {
             var gmtOffset = response.gmtOffset;
             var eastzone = gmtOffset >= 0 ? 'GMT+' + gmtOffset : 'GMT' + gmtOffset;
+            resultHtml += '<tr><td><h3> The Timezone information for ' + response.countryName + ' is:</h3></td></tr>'
             resultHtml += '<tr><td> Country: ' + response.countryName + '</td></tr>';
             resultHtml += '<tr><td> Time: ' + response.time + '</td></tr>';
             resultHtml += '<tr><td> Timezone: ' + eastzone + '</td></tr>';
