@@ -1,7 +1,20 @@
 $(document).ready(function () {
-    // Initialize the map
-    var map = L.map('map').setView([0, 0], 2); // Centered on (0, 0) with zoom level 2
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    const map = ''
+    // Set Map Layers
+lyrOSM = L.tileLayer.provider('OpenStreetMap.Mapnik', {
+    noWrap: true,
+    bounds: [
+      [-90, -180],
+      [90, 180],
+    ],
+  })
+  lyrSatellite = L.tileLayer.provider('Esri.WorldImagery', {
+    noWrap: true,
+    bounds: [
+      [-90, -180],
+      [90, 180],
+    ],
+  })
 
 
     function fetchExchangeRates() {
