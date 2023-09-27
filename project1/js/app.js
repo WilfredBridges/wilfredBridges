@@ -3,6 +3,37 @@ $(document).ready(function () {
     var map = L.map('map').setView([0, 0], 2); // Centered on (0, 0) with zoom level 2
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
+
+    function fetchExchangeRates() {
+        $.ajax({
+            url: 'https://openexchangerates.org/api/latest.json?app_id=0abdd2aba07142dda4e1701b48907917',
+            method: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                // Populate the modal with exchange rate data
+                var rates = data.rates;
+                var exchangeRateContent = '<ul>';
+                for (var currency in rates) {
+                    exchangeRateContent += '<li>' + currency + ': ' + rates[currency] + '</li>';
+                }
+                exchangeRateContent += '</ul>';
+                $('#exchangeRateContent').html(exchangeRateContent);
+
+                // Show the modal
+                $('#exchangeRateModal').modal('show');
+            },
+            error: function () {
+                // Handle errors here
+                alert('Error fetching exchange rates.');
+            }
+        });
+    }
+
+    // Event handler for opening the exchange rate modal
+    $('#showExchangeRateBtn').click(function () {
+        fetchExchangeRates();
+    });
+
     // Function to display country info modal
     function displayCountryInfo(countryCode) {
         // Implement AJAX request to fetch country information here
