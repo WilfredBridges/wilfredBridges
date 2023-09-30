@@ -4,29 +4,27 @@
 
 	$countryData = json_decode(file_get_contents("../../libs/js/countryBorders.geo.json"), true);
 
-	$country = [];
+	$borders = [];
 
 	foreach ($countryData['features'] as $feature) {
-  
-	  $temp = null;
-	  $temp['code'] = $feature["properties"]['iso_a2'];
-	  $temp['name'] = $feature["properties"]['name'];
-  
-	  array_push($country, $temp);
-	  
+
+		if ($feature["properties"]['iso_a2'] === $_POST['country']) {
+
+		$temp = null;
+		$temp['borders'] = $feature;	
+
+		array_push($borders, $temp);
+
+		break;
+		
+		};
 	};
-
-	usort($country, function ($item1, $item2) {
-
-		return $item1['name'] <=> $item2['name'];
-  
-	});
 
 	$output['status']['code'] = "200";
 	$output['status']['name'] = "ok";
 	$output['status']['description'] = "success";
 	$output['status']['returnedIn'] = intval((microtime(true) - $executionStartTime) * 1000) . " ms";
-	$output['data'] = $country;
+	$output['data'] = $borders;
 
 	header('Content-Type: application/json; charset=UTF-8');
 

@@ -5,7 +5,7 @@
 
 	$executionStartTime = microtime(true);
 
-	$url='https://restcountries.com/v3.1/alpha/'.$_POST['country'].'?fields=flags,region,capital,languages,population,area';
+	$url='https://api.opentripmap.com/0.1/en/places/bbox?lon_min='.$_POST['lonMin'].'&lat_min='.$_POST['latMin'].'&lon_max='.$_POST['lonMax'].'&lat_max='.$_POST['latMax'].'&kinds=fuel&limit=30&format=geojson&apikey=5ae2e3f221c38a28845f05b6b5f94691f7821ed68912043642e2a939'; 
 
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -26,6 +26,4 @@
 	
 	header('Content-Type: application/json; charset=UTF-8');
 
-	echo json_encode($output); 
-
-?>
+	echo json_encode($output);

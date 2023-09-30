@@ -5,7 +5,7 @@
 
 	$executionStartTime = microtime(true);
 
-	$url='https://restcountries.com/v3.1/alpha/'.$_POST['country'].'?fields=flags,region,capital,languages,population,area';
+	$url='https://api.windy.com/api/webcams/v2/list/country='.$_REQUEST['country'].'/limit=40?show=webcams:player,location&key=GjS2GRMr8FqRlNcATZwTaFTSMR992fgr';
 
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -22,10 +22,8 @@
 	$output['status']['name'] = "ok";
 	$output['status']['description'] = "success";
 	$output['status']['returnedIn'] = intval((microtime(true) - $executionStartTime) * 1000) . " ms";
-	$output['data'] = $decode;
+	$output['data'] = $decode['result']['webcams'];
 	
 	header('Content-Type: application/json; charset=UTF-8');
 
-	echo json_encode($output); 
-
-?>
+	echo json_encode($output);
