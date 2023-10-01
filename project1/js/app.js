@@ -1,98 +1,91 @@
+// app.js
+var osmMap = L.tileLayer.provider('OpenStreetMap.Mapnik');
+var imageryMap = L.tileLayer.provider('Esri.WorldImagery');
+var darkMap = L.tileLayer.provider('CartoDB.DarkMatter');
 
-// initialise the map
-var map = L.map('map').setView([51.505, -0.09], 2);
-
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
-
-// user current location
-navigator.geolocation.getCurrentPosition(success, error);
-
-function success(pos) {
-    const lat = pos.coords.latitude;
-    const lng = pos.coords.longitude;
-    const accuracy = pos.coords.accuracy;
-
-    let userMarker = L.marker([lat, lng]).addTo(map);
-    let userCircle = L.circle([lat, lng], { radius: accuracy }).addTo(map);
-
-    map.fitBounds(userCircle.getBounds());
+var baseMaps = {
+    OSM: osmMap,
+    'Satellite Map': imageryMap,
+    'Dark Map': darkMap
 }
 
-function error(err) {
-    if (err.code === 1) {
-        alert('Please allow geolocation access')
-    } else {
-        alert('Cannot get current location')
-    }
-}
+// Initialise the map
+var map = L.map('map').setView([51.505, -0.09], 5);
 
-let countryInfoBtn = L.easyButton(
-    'fas fa-info',
-    function () {
-      $('.txtCountry').html($('#selectCountry option:selected').text())
-      getCountryInfo()
-      $('#modalInfoBox').modal('show')
-    },
-    'Country Info'
-  )
-    .setPosition('topleft')
-    .addTo(map)
+var mapLayers = L.control.layers(baseMaps).addTo(map);
+osmMap.addTo(map);
 
+// Buttons
+let locationBtn = L.easyButton(
+  'fa-light fa-location-arrow',
+  function () {
+    getLocation()
+  },
+  'Home Country'
+)
+  .setPosition('topleft')
+  .addTo(map)
 
-    const loading = $('#loadingDiv').hide()
+L.control.scale({ position: 'bottomright', imperial: false }).addTo(map)
 
-    function getCountryInfo() {
-      $.ajax({
-        url: 'php/getCountryInfo.php',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-          country: selectCountry.val(),
-        },
-        beforeSend: () => {
-          loading.show()
-        },
-        complete: () => {
-          loading.hide()
-        },
-        success: function (result) {
-          if (result.status.name == 'ok') {
-            langArr = []
-            Object.values(result.data.languages).forEach(val => langArr.push(val))
-    
-            function strChop(str) {
-              if (str.length > 30) {
-                return (str = str.substring(0, 30) + '... ')
-              } else return str
+// Preloader, Populate Select List, Get Current/Default Location, Apply Initial Border & Markers
+let selectCountry = $('#selectCountry')
+selectCountry.empty()
+
+$(document).ready(function () {
+  // Populate Select List & Order
+  $.ajax({
+    url: 'php/getSelectList.php',
+    type: 'POST',
+    dataType: 'json',
+    success: function (result) {
+      if (result.status.name == 'ok') {
+        for (let i = 0; i < result.data.length; i++) {
+          selectCountry
+            .append(
+              $('<option>', {
+                value: result.data[i].code,
+                text: result.data[i].name,
+              })
+            )
+        }
+        // Initialize Select2 after options are added
+        selectCountry.select2();
+
+        selectCountry.prepend('<option selected="true" disabled>Choose / Search Country</option>');
+        selectCountry.prop('selectedIndex', 0);
+      }
+      // Get Location, Set Border & Markers
+      getLocation = function () {
+        if ('geolocation' in navigator) {
+          navigator.geolocation.getCurrentPosition(
+            function (position) {
+              $.ajax({
+                url: 'php/getCountryCodeA2.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude,
+                },
+                success: function (result) {
+                  if (result.status.name == 'ok') {
+                    currentCode = result.data.countryCode
+                    selectCountry.val(currentCode).trigger('change')
+                  }
+                },
+              })
+            },
+            function () {
+              alert('Dev Location Selected')
+              selectCountry.val('GB').trigger('change')
             }
-    
-            $('#flag').attr('src', result.data.flags.png)
-            $('#txtRegion').html(result.data.region)
-            $('#txtCapital').html(result.data.capital)
-            $('#txtLanguages').html(strChop(langArr.join(', ')))
-            $('#txtPopulation').html((result.data.population / 1000000).toFixed(1) + ' million')
-            $('#txtArea').html(result.data.area.toLocaleString())
-          }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          console.warn(`${jqXHR.status}: ${textStatus}, ${errorThrown}`)
-        },
-      })
-    }
-    
-    $('#modalInfoBox').on('hide.bs.modal', function () {
-      $('#txtRegion, #txtCapital, #txtLanguages, #txtPopulation, #txtArea').empty()
-      $('#flag').attr('src', '')
-    })
-
-// Preloader
-$(window).on('load', function () {
-    if ($('#preloader').length) {
-        $('#preloader').delay(1000).fadeOut('slow', function () {
-            $(this).remove();
-        });
-    }
+          )
+        } else {
+          console.log('Browser does not support geolocation!')
+        }
+      }
+      getLocation();
+    },
+  });
 });
