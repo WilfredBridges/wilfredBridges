@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="vendor/css/easy-button.css" type="text/css" />
     <link rel="stylesheet" href="vendor/css/fontawesome/css/all.min.css" type="text/css" />
     <link rel="stylesheet" href="vendor/css/leaflet.extra-markers.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.css" />
+
 
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -34,8 +36,17 @@
     <link rel="stylesheet" href="libs/css/main.css" type="text/css" />
   </head>
 
+  <nav class="navbar custom-bg">
+    <div class="container-fluid">
+      <a class="navbar-brand">
+        <img src="./libs/images/Map_marker.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+        Gazetteer
+      </a>
+    </div>
+  </nav>
+
   <body>
-    <!-- MAP, LOADERS & SELECT LIST -->
+    <!-- MAP & LOADERS -->
 
     <div id="preloader" class="d-flex justify-content-center align-items-center"></div>
     <div class="vw-100 vh-100" id="map"></div>
@@ -185,53 +196,22 @@
         </div>
       </div>
 
-      <!-- COVID MODAL -->
-
-      <div class="modal fade" id="modalCovidBox" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+      <!-- Exchange Rate Modal -->
+      <div class="modal fade" id="modalExchangeRateBox" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document" modal-dialog-scrollable>
           <div class="modal-content border-secondary w-75 mx-auto">
             <div class="modal-header bg-secondary">
-              <h5 class="modal-title" id="modalCovidTitle">COVID-19: <span class="txtCountry"></span></h5>
+              <h5 class="modal-title" id="modalExchangeRateTitle">Exchange Rates</h5>
               <button type="button" class="btn-close btn-close-white" aria-label="Close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
-              <div class="d-flex justify-content-center flex-column align-items-center gap-3">
-                <p class="mb-half slight-bold">Choose a Date Prior to Today</p>
-                <button type="button" class="btn btn-secondary w-50" id="resetCovid">Yesterday</button>
-                <input class="mb-half w-50" type="date" required id="date" name="date" min="2020-01-01" />
-                <hr class="w-100" />
-              </div>
-              <table class="table mb-0">
-                <tbody>
-                  <tr>
-                    <td class="table-grey">Total Cases</td>
-                    <td id="txtCovCases" class="text-end pe-3 table-grey"></td>
-                  </tr>
-                  <tr>
-                    <td>New Cases</td>
-                    <td id="txtCovCasesDiff" class="text-end pe-3"></td>
-                  </tr>
-                  <tr>
-                    <td class="table-grey">Total Deaths</td>
-                    <td id="txtCovDeaths" class="text-end pe-3 table-grey"></td>
-                  </tr>
-                  <tr>
-                    <td>New Deaths</td>
-                    <td id="txtCovDeathsDiff" class="text-end pe-3"></td>
-                  </tr>
-                  <tr>
-                    <td class="table-grey">Fatality Rate</td>
-                    <td span id="txtCovFatality" class="text-end pe-3 table-grey"></td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="modal-body" id="modalExchangeRateBody">
+          
             </div>
-            <div class="modal-footer d-flex justify-content-around">
+            <div class="d-flex justify-content-center">
               <button type="button" class="btn btn-secondary double" data-bs-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
-      </div>
     </div>
 
     <script src="vendor/js/jquery-3.6.0.min.js" type="application/javascript"></script>
@@ -240,6 +220,7 @@
     <script src="vendor/js/leaflet-providers.js"></script>
     <script src="vendor/js/leaflet.markercluster.js" type="application/javascript"></script>
     <script src="vendor/js/leaflet.extra-markers.min.js" type="application/javascript"></script>
+    <script src="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.js"></script>
     <script src="vendor/js/select2.min.js" type="application/javascript"></script>
     <script src="vendor/js/easy-button.js" type="application/javascript"></script>
     <script src="vendor/js/date.js" type="application/javascript"></script>

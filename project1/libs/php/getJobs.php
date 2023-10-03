@@ -4,10 +4,13 @@ ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 
 $executionStartTime = microtime(true);
-$app_id = '36fdd49e';
-$app_key = 'a8b43d5687fd4ded7975594012697ba2';
+// $app_id = '36fdd49e';
+// $app_key = 'a8b43d5687fd4ded7975594012697ba2';
 
-$url = "https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=$app_id&app_key=$app_key";
+
+//$country = $_POST['country'];
+
+$url = "https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=36fdd49e&app_key=a8b43d5687fd4ded7975594012697ba2&results_per_page=50&what_phrase=software%20engineer&category=it-jobs&full_time=1&permanent=1";
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -28,3 +31,5 @@ $output['data'] = $decode;
 header('Content-Type: application/json; charset=UTF-8');
 
 echo json_encode($output);
+
+?>

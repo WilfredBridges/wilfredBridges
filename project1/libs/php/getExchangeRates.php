@@ -1,11 +1,4 @@
 <?php
-
-ini_set('display_errors', 'On');
-error_reporting(E_ALL);
-
-$executionStartTime = microtime(true);
-
-
 $app_id = '0abdd2aba07142dda4e1701b48907917';
 $url = "https://openexchangerates.org/api/latest.json?app_id=$app_id";
 
