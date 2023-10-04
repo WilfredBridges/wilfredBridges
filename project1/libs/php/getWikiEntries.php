@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 $executionStartTime = microtime(true);
 
 
-$url = 'http://api.geonames.org/wikipediaSearchJSON?q=' . $_POST['country'] . '&username=jarekwyprzal&maxRows=60';
+$url = 'http://api.geonames.org/wikipediaSearchJSON?q=' . $_POST['country'] . '&username=wilfredbridges&maxRows=60';
 
 
 

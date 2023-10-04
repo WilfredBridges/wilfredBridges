@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 
 $executionStartTime = microtime(true);
 
-$url = 'http://api.geonames.org/citiesJSON?north=' . $_POST['north'] . '&south=' . $_POST['south'] . '&east=' . $_POST['east'] . '&west=' . $_POST['west'] . '&maxRows=300&username=jarekwyprzal';
+$url = 'http://api.geonames.org/citiesJSON?north=' . $_POST['north'] . '&south=' . $_POST['south'] . '&east=' . $_POST['east'] . '&west=' . $_POST['west'] . '&maxRows=300&username=wilfredbridges';
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

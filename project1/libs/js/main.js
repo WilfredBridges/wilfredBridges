@@ -1090,9 +1090,7 @@ function fetchExchangeRates() {
   });
 }
 
-// Add an event listener to the Exchange Rate modal when it's shown
 $('#modalExchangeRateBox').on('shown.bs.modal', function (e) {
-  // Fetch exchange rate data when the modal is shown
   fetchExchangeRates();
 });
 

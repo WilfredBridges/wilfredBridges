@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 $executionStartTime = microtime(true);
 
 
-$url = 'http://api.geonames.org/countryCodeJSON?lat=' . $_POST['lat'] . '&lng=' . $_POST['lng'] . '&username=jarekwyprzal&style=full';
+$url = 'http://api.geonames.org/countryCodeJSON?lat=' . $_POST['lat'] . '&lng=' . $_POST['lng'] . '&username=wilfredbridges&style=full';
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
