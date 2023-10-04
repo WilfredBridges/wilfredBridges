@@ -778,6 +778,59 @@ function getCountryInfo() {
           } else return str
         }
 
+        const currencies = result.data.currencies;
+
+        let currencyInfo = [];
+
+        // Function to make the exchange rate API call for a specific currency code
+        function fetchExchangeRate(currencyCode) {
+          return $.ajax({
+            url: 'libs/php/getExchangeRates.php',
+            type: 'POST',
+            data: {
+              currencyCode: currencyCode
+            },
+            dataType: 'json',
+          });
+        }
+
+        // Create an array of promises for fetching exchange rates
+        const exchangeRatePromises = [];
+
+        // Iterate over the keys in the currencies object
+        for (const currencyKey in currencies) {
+          if (currencies.hasOwnProperty(currencyKey)) {
+            exchangeRatePromises.push(fetchExchangeRate(currencyKey));
+          }
+        }
+
+        // Use Promise.all to wait for all exchange rate requests to complete
+        Promise.all(exchangeRatePromises)
+          .then(function (exchangeRateDataArray) {
+            // Process the exchange rate data
+            exchangeRateDataArray.forEach(function (exchangeRateData, index) {
+              const currency = currencies[Object.keys(currencies)[index]];
+              const currencyKey = Object.keys(currencies)[index];
+              
+              if (exchangeRateData.status.name === 'ok' && exchangeRateData.rates) {
+                const exchangeRate = exchangeRateData.rates[currencyKey];
+                const currencyInfoString = `${currency.name} (${currency.symbol}) <br> 1 ${currencyKey} = ${exchangeRate.toFixed(2)} USD`;
+                currencyInfo.push(currencyInfoString);
+              } else {
+                console.error(`Error fetching exchange rate for ${currencyKey}`);
+              }
+
+              // Check if all API calls are complete before updating the HTML
+              if (currencyInfo.length === Object.keys(currencies).length) {
+                const currencyInfoString = currencyInfo.join('<br>');
+                $('#txtCurrencies').html(currencyInfoString);
+              }
+            });
+          })
+          .catch(function (error) {
+            console.error('Error fetching exchange rates:', error);
+          });
+
         $('#flag').attr('src', result.data.flags.png)
         $('#txtRegion').html(result.data.region)
         $('#txtCapital').html(result.data.capital)
@@ -796,6 +849,7 @@ $('#modalInfoBox').on('hide.bs.modal', function () {
   $('#txtRegion, #txtCapital, #txtLanguages, #txtPopulation, #txtArea').empty()
   $('#flag').attr('src', '')
 })
+
 
 // Weather Button
 
@@ -1049,48 +1103,5 @@ $(document).on('click', '.wikiLinkLoad', function () {
 
 
 
-// Exchange Rate Modal
 
-function fetchExchangeRates() {
-  $.ajax({
-    url: 'libs/php/getExchangeRates.php', // Create this PHP file
-    type: 'GET',
-    dataType: 'json',
-    success: function (data) {
-      if (data.status.code === '200') {
-        const rates = data.rates;
-        const modalBody = $('#modalExchangeRateBody');
-
-        // Clear previous data
-        modalBody.empty();
-
-        // Create a table to display exchange rates
-        const table = $('<table class="table"></table>');
-        const tableBody = $('<tbody></tbody>');
-
-        for (const currency in rates) {
-          const rate = rates[currency];
-          const row = $('<tr></tr>');
-          row.append(`<td>${currency}</td>`);
-          row.append(`<td>${rate}</td>`);
-          tableBody.append(row);
-        }
-
-        table.append(tableBody);
-        modalBody.append(table);
-      } else {
-        // Handle error
-        alert('Failed to fetch exchange rates.');
-      }
-    },
-    error: function () {
-      // Handle error
-      alert('Failed to fetch exchange rates.');
-    },
-  });
-}
-
-$('#modalExchangeRateBox').on('shown.bs.modal', function (e) {
-  fetchExchangeRates();
-});
 

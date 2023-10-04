@@ -1,14 +1,6 @@
 <?php
-
 $app_id = '0abdd2aba07142dda4e1701b48907917';
-
-// Check if a specific currency code is provided
-if (isset($_POST['currencyCode'])) {
-    $currencyCode = $_POST['currencyCode'];
-    $url = "https://openexchangerates.org/api/latest.json?app_id=$app_id&currencies=$currencyCode";
-} else {
-    $url = "https://openexchangerates.org/api/latest.json?app_id=$app_id";
-}
+$url = "https://openexchangerates.org/api/latest.json?app_id=$app_id";
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -34,5 +26,3 @@ if (isset($data['rates'])) {
 
 header('Content-Type: application/json; charset=UTF-8');
 echo json_encode($output);
-
-?>

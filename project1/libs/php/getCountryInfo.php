@@ -5,7 +5,7 @@
 
 	$executionStartTime = microtime(true);
 
-	$url='https://restcountries.com/v3.1/alpha/'.$_POST['country'].'?fields=flags,region,capital,languages,population,area';
+	$url='https://restcountries.com/v3.1/alpha/'.$_POST['country'].'?fields=flags,region,capital,languages,population,area,currencies';
 
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
