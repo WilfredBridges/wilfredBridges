@@ -120,19 +120,17 @@ let wikiInfoBtn = L.easyButton(
   'Wikipedia'
 ).addTo(map)
 
-var exchangeRateButton = L.easyButton({
-  states: [
-      {
-          icon: 'fas fa-dollar-sign',
-          title: 'Exchange Rate',
-          onClick: function (control) {
-              // Open the Exchange Rate modal when the button is clicked
-              $('#modalExchangeRateBox').modal('show');
-          },
-      },
-  ],
-});
-exchangeRateButton.addTo(map);
+// Images Button
+let imagesBtn = L.easyButton(
+  'fa fa-camera', 
+  function () {
+    $('.txtCountry').html($('#selectCountry option:selected').text())
+    getImages(); 
+    $('#imagesModalScrollable').modal('show'); 
+  },
+  'Country Images' 
+).addTo(map);
+
 
 
 // Preloader, Populate Select List, Get Current/Default Location, Apply Initial Border & Markers
@@ -1027,6 +1025,8 @@ $('#modalWeatherBox').on('hide.bs.modal', function () {
   selectedCity.empty()
 })
 
+// WikiInfo Button
+
 function getWikiInfo() {
   countryName = $('#selectCountry option:selected').text()
   let searchName = countryName.split(' ').join('%20')
@@ -1100,6 +1100,41 @@ $(document).on('click', '.wikiLinkLoad', function () {
   let hrefVal = $(this).attr('href')
   $('#wikiNewTab').attr('href', hrefVal)
 })
+
+
+// Images Button
+function getImages() {
+  let countryName = $('#selectCountry option:selected').text()
+  $.ajax({
+    url: 'libs/php/getCountryImages.php',
+    type: 'POST',
+    dataType: 'json',
+    data: {
+      query: countryName, 
+    },
+    success: function (result) {
+      $("#countryImages").empty();
+                
+      if (result.status.name == "ok") {
+        for(var i = 0; i < result['data']['results'].length; i++) {
+          // Create a heading element for each image
+          let heading = $("<h5 class='image-heading'>:</h5>");
+          heading.text(result['data']['results'][i]['alt_description']);
+          $("#countryImages").append(heading);
+
+          // Create an image element
+          let img = $("<img class='countryImages' />");
+          img.attr('src', result['data']['results'][i]['urls']['regular']);
+          img.attr('alt', result['data']['results'][i]['alt_description']);
+          $("#countryImages").append(img);
+        }
+      }
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.warn(`${jqXHR.status}: ${textStatus}, ${errorThrown}`)
+    },
+  });
+}
 
 
 

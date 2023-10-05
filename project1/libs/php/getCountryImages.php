@@ -7,7 +7,8 @@
 
     $app_id = 'bPj_F_3Qd1G4n4bmnJzcVKmJIDm_6Oj_91yL34gzRNs';
 
-	$url = "https://api.unsplash.com/search/photos?query=france&client_id=$app_id";
+    $url = "https://api.unsplash.com/search/photos?page=1&query=" . urlencode($_REQUEST['query']) . "&client_id=" . $app_id;
+
 
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);

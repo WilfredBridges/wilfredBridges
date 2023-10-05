@@ -12,6 +12,16 @@
   background-color: rgba(173, 216, 230, 0.3); 
 }
 
+#navbar {
+  background-color: rgba(122, 191, 200, 0.966);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; 
+}
+
+
 
 .leaflet-touch .leaflet-control-layers-toggle {
   width: 44px !important;
@@ -52,7 +62,7 @@
 }
 
 .fa-wikipedia-w,
-.fa-dollar-sign,
+.fa-camera,
 .fa-info,
 .fa-pound-sign,
 .fa-cloud-sun,
@@ -68,7 +78,7 @@
   font-size: 1.5rem;
 }
 .fa-wikipedia-w,
-.fa-dollar-sign {
+.fa-camera {
   font-size: 1.5rem;
 }
 
@@ -89,7 +99,7 @@
   }
 
   .fa-wikipedia-w,
-  .fa-dollar-sign,
+  .fa-camera,
   .fa-info,
   .fa-pound-sign,
   .fa-cloud-sun,
@@ -235,4 +245,9 @@ iframe {
   border-top: 2px solid black;
   height: 33vh;
   
+}
+
+.countryImages {
+  width: 450px;
+  height: 550px;
 }

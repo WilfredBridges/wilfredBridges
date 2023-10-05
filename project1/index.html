@@ -36,10 +36,10 @@
     <link rel="stylesheet" href="libs/css/main.css" type="text/css" />
   </head>
 
-  <nav class="navbar custom-bg">
+  <nav id="navbar" class="navbar custom-bg">
     <div class="container-fluid">
       <a class="navbar-brand">
-        <img src="./libs/images/Map_marker.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+        <img src="./libs/images/Map_marker.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
         Gazetteer
       </a>
     </div>
@@ -192,6 +192,29 @@
             </div>
             <div class="modal-body" id="wikibody"></div>
             <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-secondary double" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMAGES MODAL -->
+
+      <div class="modal fade" id="imagesModalScrollable" tabindex="-1" role="dialog" aria-labelledby="imagesModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div class="modal-header bg-secondary">
+              <h5 class="modal-title" id="imagesModalScrollableTitle" data-dismiss="modal"></span>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="txtCountry"></span> Images</h5>
+              <button type="button" class="btn-close btn-close-white" aria-label="Close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="imagebody"> 
+              <div class="row infoPanel p-0 m-0" aria-labelledby="headingFive">
+                <div id="countryImages" class="col-12">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-around">
               <button type="button" class="btn btn-secondary double" data-bs-dismiss="modal">Close</button>
             </div>
           </div>
