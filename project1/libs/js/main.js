@@ -812,7 +812,7 @@ function getCountryInfo() {
               
               if (exchangeRateData.status.name === 'ok' && exchangeRateData.rates) {
                 const exchangeRate = exchangeRateData.rates[currencyKey];
-                const currencyInfoString = `${currency.name} (${currency.symbol}) <br> 1 ${currencyKey} = ${exchangeRate.toFixed(2)} USD`;
+                const currencyInfoString = `${currency.name} (${currency.symbol}) <br> 1 USD = ${exchangeRate.toFixed(2)} ${currencyKey}`;
                 currencyInfo.push(currencyInfoString);
               } else {
                 console.error(`Error fetching exchange rate for ${currencyKey}`);
