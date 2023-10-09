@@ -67,9 +67,11 @@ let map = L.map('map', {
 
 // Display Zoom, Location and Layer Buttons
 
+// L.control.scale({ position: 'bottomright', imperial: false }).addTo(map)
+
 L.control
   .zoomslider({
-    position: 'topright',
+    position: 'bottomright',
   })
   .addTo(map)
 
@@ -86,7 +88,7 @@ let locationBtn = L.easyButton(
   .setPosition('topleft')
   .addTo(map)
 
-L.control.scale({ position: 'bottomright', imperial: false }).addTo(map)
+
 
 // Buttons
 
@@ -220,17 +222,17 @@ function countryBorder() {
         function setColor() {
           let myStyle = {
             fillColor: '',
-            weight: 4,
+            weight: 2,
             opacity: 1,
             color: 'black',
-            fillOpacity: 0.4,
+            fillOpacity: 0.2,
           }
 
           if (map.hasLayer(lyrOSM)) {
             myStyle.fillColor = 'blue'
           } else {
             myStyle.fillColor = 'lightgray',
-            myStyle.color = 'white'
+            myStyle.color = 'red'
           }
           return myStyle
         }
