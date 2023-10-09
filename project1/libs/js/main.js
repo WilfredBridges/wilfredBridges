@@ -742,8 +742,6 @@ map.on('popupopen', function (e) {
   }
 })
 
-var marker = L.marker([40, -4]).addTo(map)
-
 var ctlMeasure = L.control.polylineMeasure({
   position: 'topleft',
   measureControlTitle: 'Measure Lenght'
