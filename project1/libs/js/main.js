@@ -780,7 +780,7 @@ function getCountryInfo() {
 
         let currencyInfo = [];
 
-        // Function to make the exchange rate API call for a specific currency code
+        // Function to make the exchange rate API call
         function fetchExchangeRate(currencyCode) {
           return $.ajax({
             url: 'libs/php/getExchangeRates.php',
@@ -792,10 +792,8 @@ function getCountryInfo() {
           });
         }
 
-        // Create an array of promises for fetching exchange rates
+        
         const exchangeRatePromises = [];
-
-        // Iterate over the keys in the currencies object
         for (const currencyKey in currencies) {
           if (currencies.hasOwnProperty(currencyKey)) {
             exchangeRatePromises.push(fetchExchangeRate(currencyKey));
@@ -818,7 +816,7 @@ function getCountryInfo() {
                 console.error(`Error fetching exchange rate for ${currencyKey}`);
               }
 
-              // Check if all API calls are complete before updating the HTML
+              
               if (currencyInfo.length === Object.keys(currencies).length) {
                 const currencyInfoString = currencyInfo.join('<br>');
                 $('#txtCurrencies').html(currencyInfoString);
@@ -875,7 +873,7 @@ function getWeatherInfo() {
         capital = result.data[0].capital
       }
 
-      // Pre-populate with default (capital city) values
+     
 
       $.ajax({
         url: 'libs/php/getWeather.php',
@@ -964,7 +962,7 @@ function getWeatherInfo() {
                   selectedCity.prepend(`<option selected="true" disabled>${capital}</option>`)
                   selectedCity.prop('selectedIndex', 0)
 
-                  // Get Current Weather from search
+                  // Get Current Weather
 
                   $('#btnWeather')
                     .unbind()
