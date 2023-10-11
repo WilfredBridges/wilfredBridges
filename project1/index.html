@@ -97,10 +97,6 @@
                     <td>Area (km<sup>2</sup>)</td>
                     <td span id="txtArea" class="text-end pe-3"></td>
                   </tr>
-                  <tr>
-                    <td>Currency</td>
-                    <td span id="txtCurrencies" class="text-end pe-3"></td>
-                  </tr>
                 </tbody>
               </table>
             </div>
@@ -220,6 +216,42 @@
           </div>
         </div>
       </div>
+
+<!-- Exchange Rate Modal -->
+
+<div class="modal fade" id="currencyModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content border-secondary w-75 mx-auto">
+      <div class="modal-header bg-secondary">
+        <h5 class="modal-title" id="currencyModalLabel">
+          Local Currency: <span id="currencyCode"></span> (<span id="currencySymbol"></span>)
+        </h5>
+        
+        <button type="button" class="btn-close btn-close-white" aria-label="Close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="currencybody">
+        <!-- Input for entering the amount -->
+        <div class="form-group">
+          <label for="amountInput">Enter Amount</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="amountInput" placeholder="Enter amount">
+            <div class="input-group-append">
+              <button type="button" class="btn btn-secondary" id="convertButton">Convert</button>
+            </div>
+          </div>
+        </div>
+        <p><span id="exchangeRates">Exchange Rate:</span></p>
+        <div>
+          <span id="inputAmount"></span> USD = <span id="convertedAmount"></span> <span id="currencyCode"></span>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-around">
+        <button type="button" class="btn btn-secondary double" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
     </div>
 

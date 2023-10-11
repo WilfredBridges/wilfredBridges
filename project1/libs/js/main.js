@@ -133,6 +133,19 @@ let imagesBtn = L.easyButton(
   'Country Images' 
 ).addTo(map);
 
+// Exchange Rate Button
+
+let ExchangeButton = L.easyButton(
+  'fa fa-dollar-sign', 
+  function() {
+    getExchangeRates();
+    $('#amountInput').val(1);
+    $('#convertButton').on('click', function() {
+      getExchangeRates();
+    });
+    $('#currencyModal').modal('show');
+}).addTo(map);
+
 
 
 // Preloader, Populate Select List, Get Current/Default Location, Apply Initial Border & Markers
@@ -771,61 +784,12 @@ function getCountryInfo() {
         Object.values(result.data.languages).forEach(val => langArr.push(val))
 
         function strChop(str) {
-          if (str.length > 30) {
-            return (str = str.substring(0, 30) + '... ')
+          if (str.length > 50) {
+            return (str = str.substring(0, 50) + '... ')
           } else return str
         }
 
-        const currencies = result.data.currencies;
 
-        let currencyInfo = [];
-
-        // Function to make the exchange rate API call
-        function fetchExchangeRate(currencyCode) {
-          return $.ajax({
-            url: 'libs/php/getExchangeRates.php',
-            type: 'POST',
-            data: {
-              currencyCode: currencyCode
-            },
-            dataType: 'json',
-          });
-        }
-
-        
-        const exchangeRatePromises = [];
-        for (const currencyKey in currencies) {
-          if (currencies.hasOwnProperty(currencyKey)) {
-            exchangeRatePromises.push(fetchExchangeRate(currencyKey));
-          }
-        }
-
-        // Use Promise.all to wait for all exchange rate requests to complete
-        Promise.all(exchangeRatePromises)
-          .then(function (exchangeRateDataArray) {
-            // Process the exchange rate data
-            exchangeRateDataArray.forEach(function (exchangeRateData, index) {
-              const currency = currencies[Object.keys(currencies)[index]];
-              const currencyKey = Object.keys(currencies)[index];
-              
-              if (exchangeRateData.status.name === 'ok' && exchangeRateData.rates) {
-                const exchangeRate = exchangeRateData.rates[currencyKey];
-                const currencyInfoString = `${currency.name} (${currency.symbol}) <br> 1 USD = ${exchangeRate.toFixed(2)} ${currencyKey}`;
-                currencyInfo.push(currencyInfoString);
-              } else {
-                console.error(`Error fetching exchange rate for ${currencyKey}`);
-              }
-
-              
-              if (currencyInfo.length === Object.keys(currencies).length) {
-                const currencyInfoString = currencyInfo.join('<br>');
-                $('#txtCurrencies').html(currencyInfoString);
-              }
-            });
-          })
-          .catch(function (error) {
-            console.error('Error fetching exchange rates:', error);
-          });
 
         $('#flag').attr('src', result.data.flags.png)
         $('#txtRegion').html(result.data.region)
@@ -1134,6 +1098,61 @@ function getImages() {
   });
 }
 
+// Exchange Rate Function
+
+function getExchangeRates() {
+  $.ajax({
+    url: 'libs/php/getCountryInfo.php',
+    type: 'POST',
+    dataType: 'json',
+    data: {
+      country: selectCountry.val(),
+    },
+    success: function(countryInfoResponse) {
+      // Extract currency code and symbol
+      const currencyCode = Object.keys(countryInfoResponse.data.currencies)[0];
+      const currencySymbol = countryInfoResponse.data.currencies[currencyCode].symbol;
+
+      console.log(currencySymbol)
+
+      // Display the currency code in the heading
+      $('#currencyModalLabel').text('Local Currency: ' + currencyCode);
+      $('#currencySymbol').text(currencySymbol);
+
+      // Get the input amount
+      const amount = $('#amountInput').val();
+
+      // Call the second API to get exchange rates
+      $.ajax({
+        url: 'libs/php/getExchangeRates.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          currencyCode: currencyCode,
+        },
+        success: function(exchangeRateResponse) {
+          const exchangeRate = exchangeRateResponse.rates[currencyCode];
+
+          // Calculate the converted amount
+          const convertedAmount = amount * exchangeRate;
+
+          // Display exchange rate and conversion result
+          $('#exchangeRate').text('Exchange Rate: ' + exchangeRate);
+          $('#inputAmount').text(amount);
+          $('#convertedAmount').text(convertedAmount + ' ' + currencyCode);
+
+          $('#currencyModal').modal('show');
+        },
+        error: function(exchangeRateError) {
+          console.error('Error fetching exchange rates:', exchangeRateError);
+        }
+      });
+    },
+    error: function(countryInfoError) {
+      console.error('Error fetching country info:', countryInfoError);
+    }
+  });
+}
 
 
 

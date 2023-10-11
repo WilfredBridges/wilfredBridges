@@ -56,6 +56,10 @@
   height: 3rem;
 }
 
+#currencySymbol {
+  font-size: 1.25rem;
+}
+
 .marker-cluster-medium {
   background-color: rgba(241, 238, 87, 0.6);
 }
@@ -64,6 +68,7 @@
 }
 
 .fa-wikipedia-w,
+.fa-dollar-sign,
 .fa-camera,
 .fa-info,
 .fa-pound-sign,
@@ -74,6 +79,7 @@
 }
 .fa-info,
 .fa-pound-sign,
+.fa-dollar-sign,
 .fa-cloud-sun,
 .fa-compass,
 .fa-home {
@@ -104,12 +110,14 @@
   .fa-camera,
   .fa-info,
   .fa-pound-sign,
+  .fa-dollar-sign,
   .fa-cloud-sun,
   .fa-home {
     line-height: 53px;
   }
   .fa-info,
   .fa-pound-sign,
+  .fa-dollar-sign,
   .fa-cloud-sun {
     font-size: 35px;
   }
@@ -117,7 +125,7 @@
     font-size: 32px;
   }
 
-  .currency-inp {
+  #amountInput{
     width: 75% !important;
   }
 }
