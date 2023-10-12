@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>Gazetteer</title>
+    <!-- META -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="An interactive map containing information on the countries of the world" />
+    <meta name="author" content="Wilfred Bridges" />
+    <!-- FAVICON -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <!-- LEAFLET MAP -->
+    <link rel="stylesheet" href="vendor/css/leaflet.css" type="text/css" />
+
+    <!-- LEAFLET PLUGINS -->
+
+    <link rel="stylesheet" href="vendor/css/L.Control.Zoomslider.css" type="text/css" />
+    <link rel="stylesheet" href="vendor/css/MarkerCluster.css" type="text/css" />
+    <link rel="stylesheet" href="vendor/css/MarkerCluster.Default.css" type="text/css" />
+    <link rel="stylesheet" href="vendor/css/select2.min.css" type="text/css" />
+    <link rel="stylesheet" href="vendor/css/easy-button.css" type="text/css" />
+    <link rel="stylesheet" href="vendor/css/fontawesome/css/all.min.css" type="text/css" />
+    <link rel="stylesheet" href="vendor/css/leaflet.extra-markers.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.css" />
+
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" />
+
+    <!-- STYLES -->
+    <link rel="stylesheet" href="vendor/css/bootstrap.min.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="libs/css/main.css" type="text/css" />
+  </head>
+
+  <nav id="navbar" class="navbar custom-bg">
+    <div class="container-fluid">
+      <a class="navbar-brand">
+        <img src="./libs/images/Map_marker.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+        <span id="appName">Gazetteer</span>
+      </a>
+    </div>
+  </nav>
+
+  <body>
+    <!-- MAP & LOADERS -->
+
+    <div id="preloader" class="d-flex justify-content-center align-items-center"></div>
+    <div class="vw-100 vh-100" id="map"></div>
+
+    <div id="selContainer" class="position-absolute top-0 start-50 translate-middle-x w-100 d-flex justify-content-center mt-2">
+      <select id="selectCountry" class=""></select>
+    </div>
+
+    <div id="loadingDiv">
+      <div class="spinner-grow text-secondary" id="loadingDiv2" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+
+    <!-- INFORMATION MODAL -->
+
+    <div id="modalContainer">
+      <div class="modal fade" id="modalInfoBox" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+          <div class="modal-content border-secondary w-75 mx-auto">
+            <div class="modal-header bg-secondary">
+              <h5 class="modal-title" id="modalInfoTitle">
+                <span><img id="flag" /></span>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="txtCountry"></span>
+              </h5>
+              <button type="button" class="btn-close btn-close-white" aria-label="Close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table mb-0">
+                <tbody>
+                  <tr>
+                    <td>Continent</td>
+                    <td id="txtRegion" class="text-end pe-3"></td>
+                  </tr>
+                  <tr>
+                    <td>Capital City</td>
+                    <td id="txtCapital" class="text-end pe-3"></td>
+                  </tr>
+                  <tr>
+                    <td>Languages</td>
+                    <td id="txtLanguages" class="text-end pe-3"></td>
+                  </tr>
+                  <tr>
+                    <td>Population</td>
+                    <td id="txtPopulation" class="text-end pe-3"></td>
+                  </tr>
+                  <tr>
+                    <td>Area (km<sup>2</sup>)</td>
+                    <td span id="txtArea" class="text-end pe-3"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer justify-content-center">
+              <button type="button" class="btn btn-secondary w-50 text-center" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEATHER MODAL -->
+
+      <div class="modal fade" id="modalWeatherBox" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+          <div class="modal-content w-75 mx-auto">
+            <div class="modal-header bg-secondary">
+              <h5 class="modal-title" id="modalWeatherTitle"><span class="txtCountry"></span> Weather</h5>
+              <button type="button" class="btn-close btn-close-white" aria-label="Close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body weather-body pb-0">
+              <div class="input-group w-100 weather-inp flex-nowrap mb-3 gap-1 d-flex flex-column justify-content-center">
+                <button type="button" class="btn btn-secondary" id="resetWeather">Capital</button>
+                <div class="d-flex flex-row gap-2">
+                  <button class="btn btn-secondary flex-fill" id="btnWeather" type="button">Select</button>
+                  <select class="form-select w-50" id="selectedCity" aria-label="City select for weather"></select>
+                </div>
+              </div>
+
+              <table class="table table-borderless text-center align-middle mt-0">
+                <tbody>
+                  <div class="row border-bottom">
+                    <div class="col-4 d-flex align-items-center justify-content-end p-0">
+                      <div><img id="weatherIcon" /></div>
+                    </div>
+                    <div class="col-3 d-flex flex-column align-items-center justify-content-center p-0">
+                      <p class="display-6 m-0 p-0" id="weatherTemp"></p>
+                      <div class="text-center m-0 p-0"><small id="weatherDesc"></small></div>
+                    </div>
+                    <div class="col-5 d-flex align-items-center justify-content-start pl-2 gap-2">
+                      <div>
+                        <p class="m-0 p-0">
+                          <small><i class="fas fa-tint"></i></small>
+                        </p>
+                        <p class="m-0 p-0">
+                          <small><i class="fa-solid fa-gem"></i></small>
+                        </p>
+                        <p class="m-0 p-0">
+                          <small><i class="fas fa-fan"></i></small>
+                        </p>
+                      </div>
+                      <div>
+                        <p class="m-0 p-0"><small id="weatherHumidity"></small></p>
+                        <p class="m-0 p-0"><small id="weatherPressure"></small></p>
+                        <p class="m-0 p-0"><small id="weatherWindSd"></small></p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row d-flex align-items-center justify-content-end pt-2">
+                    <div class="col d-flex align-items-center justify-content-end flex-column">
+                      <div><img src="libs/images/sunrise.png" alt="sunrise icon" /></div>
+                      <div id="weatherSunrise"></div>
+                    </div>
+                    <div class="col d-flex align-items-center justify-content-end flex-column pt-2">
+                      <div><img src="libs/images/sunset.png" alt="sunset icon" /></div>
+                      <div id="weatherSunset">wea</div>
+                    </div>
+                  </div>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="modal-footer d-flex justify-content-around">
+              <button type="button" class="btn btn-secondary double" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WIKIPEDIA MODAL -->
+
+      <div class="modal fade" id="modalWikiBox" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document" modal-dialog-scrollable>
+          <div class="modal-content border-secondary w-75 mx-auto">
+            <div class="modal-header bg-secondary">
+              <h5 class="modal-title" id="modalWikiTitle">Wikipedia</h5>
+              <button type="button" class="btn-close btn-close-white" aria-label="Close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="wikibody"></div>
+            <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-secondary double" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMAGES MODAL -->
+
+      <div class="modal fade" id="imagesModalScrollable" tabindex="-1" role="dialog" aria-labelledby="imagesModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div class="modal-header bg-secondary">
+              <h5 class="modal-title" id="imagesModalScrollableTitle" data-dismiss="modal"></span>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="txtCountry"></span> Images</h5>
+              <button type="button" class="btn-close btn-close-white" aria-label="Close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="imagebody"> 
+              <div class="row infoPanel p-0 m-0" aria-labelledby="headingFive">
+                <div id="countryImages" class="col-12">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-around">
+              <button type="button" class="btn btn-secondary double" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!-- Exchange Rate Modal -->
+
+<div class="modal fade" id="currencyModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content border-secondary w-75 mx-auto">
+      <div class="modal-header bg-secondary">
+        <h5 class="modal-title" id="currencyModalLabel">
+          Local Currency: <span id="currencyCode"></span> (<span id="currencySymbol"></span>)
+        </h5>
+        
+        <button type="button" class="btn-close btn-close-white" aria-label="Close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="currencybody">
+        <!-- Input for entering the amount -->
+        <div class="form-group">
+          <label for="amountInput">Enter Amount</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="amountInput" placeholder="Enter amount">
+            <div class="input-group-append">
+              <button type="button" class="btn btn-secondary" id="convertButton">Convert</button>
+            </div>
+          </div>
+        </div>
+        <p><span id="exchangeRates">Exchange Rate:</span></p>
+        <div>
+          <span id="inputAmount"></span> USD = <span id="convertedAmount"></span> <span id="currencyCode"></span>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-around">
+        <button type="button" class="btn btn-secondary double" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="vendor/js/jquery-3.6.0.min.js" type="application/javascript"></script>
+    <script src="vendor/js/bootstrap.bundle.min.js" type="application/javascript"></script>
+    <script src="vendor/js/leaflet.js" type="application/javascript"></script>
+    <script src="vendor/js/leaflet-providers.js"></script>
+    <script src="vendor/js/leaflet.markercluster.js" type="application/javascript"></script>
+    <script src="vendor/js/leaflet.extra-markers.min.js" type="application/javascript"></script>
+    <script src="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.js"></script>
+    <script src="vendor/js/select2.min.js" type="application/javascript"></script>
+    <script src="vendor/js/easy-button.js" type="application/javascript"></script>
+    <script src="vendor/js/date.js" type="application/javascript"></script>
+    <script src="vendor/js/L.Control.Zoomslider.js" type="application/javascript"></script>
+    <script src="libs/js/main.js" type="application/javascript"></script>
+  </body>
+</html>

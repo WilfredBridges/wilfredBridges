@@ -1,0 +1,272 @@
+#preloader {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: url('../images/earth.gif') no-repeat center;
+  background-color: rgb(0, 0, 0);
+  background-size: 400px 300px;
+  z-index: 10000;
+}
+
+.custom-bg {
+  background-color: rgba(173, 216, 230, 0.3); 
+}
+
+#navbar {
+  background-color: rgba(122, 191, 200, 0.966);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; 
+}
+
+
+
+
+
+.leaflet-touch .leaflet-control-layers-toggle {
+  width: 44px !important;
+  height: 44px !important;
+}
+
+#selContainer {
+  z-index: 1000;
+}
+
+#selectCountry {
+  width: min(65%, 400px);
+}
+
+#loadingDiv {
+  background: rgba(122, 191, 200, 0.966);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+}
+
+#loadingDiv2 {
+  position: absolute;
+  top: calc(50% - 1.5rem);
+  left: calc(50% - 1.5rem);
+  width: 3rem;
+  height: 3rem;
+}
+
+#currencySymbol {
+  font-size: 1.25rem;
+}
+
+.marker-cluster-medium {
+  background-color: rgba(241, 238, 87, 0.6);
+}
+.marker-cluster-medium div {
+  background-color: rgba(245, 229, 8, 0.6);
+}
+
+.fa-wikipedia-w,
+.fa-dollar-sign,
+.fa-camera,
+.fa-info,
+.fa-pound-sign,
+.fa-cloud-sun,
+.fa-compass,
+.fa-home {
+  line-height: 3rem;
+}
+.fa-info,
+.fa-pound-sign,
+.fa-dollar-sign,
+.fa-cloud-sun,
+.fa-compass,
+.fa-home {
+  font-size: 1.5rem;
+}
+.fa-wikipedia-w,
+.fa-camera {
+  font-size: 1.5rem;
+}
+
+@media only screen and (min-width: 759px) {
+  .leaflet-bar button {
+    width: 53px !important;
+    height: 53px !important;
+    line-height: 53px !important;
+  }
+  button[title='Home Country'] {
+    width: 53px !important;
+    height: 53px !important;
+  }
+
+  .leaflet-touch .leaflet-control-layers-toggle {
+    width: 53px !important;
+    height: 53px !important;
+  }
+
+  .fa-wikipedia-w,
+  .fa-camera,
+  .fa-info,
+  .fa-pound-sign,
+  .fa-dollar-sign,
+  .fa-cloud-sun,
+  .fa-home {
+    line-height: 53px;
+  }
+  .fa-info,
+  .fa-pound-sign,
+  .fa-dollar-sign,
+  .fa-cloud-sun {
+    font-size: 35px;
+  }
+  .fa-wikipedia-w {
+    font-size: 32px;
+  }
+
+  #amountInput{
+    width: 75% !important;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .custom-tooltip {
+    display: none;
+  }
+}
+
+.modal-header {
+  color: #fff;
+  background-color: rgb(13, 110, 253);
+}
+
+.mb-half {
+  margin-bottom: 0.6em;
+}
+
+#flag {
+  height: 3rem;
+  /* border: thin solid lightgray; */
+}
+
+.table-grey {
+  background-color: rgb(242, 242, 242) !important;
+}
+
+/* overide easybutton hover */
+.easy-button-button[title='Home Country']:hover {
+  background-color: rgb(244, 244, 244) !important;
+  color: black !important;
+  box-shadow: none;
+}
+.easy-button-button:hover {
+  background-color: black !important;
+  color: white !important;
+  box-shadow: 0 0 15px 3px white;
+}
+
+#modalWikiBox p a:visited {
+  color: rgb(102, 0, 153);
+}
+
+#modalWikiBox p a:hover {
+  background-color: rgba(212, 212, 212, 0.507);
+}
+
+#currencyConvert {
+  width: 100px;
+}
+
+#selectConversion {
+  width: 240px;
+}
+
+#wikiLink1 {
+  width: 100%;
+}
+
+.double {
+  width: 47%;
+  margin: 0.5rem;
+}
+
+.infoGroup {
+  line-height: 35px;
+}
+
+.slight-bold {
+  font-weight: 500;
+}
+
+.custom-popup .leaflet-popup-content-wrapper {
+  background-color: #2c3e50;
+  color: white;
+  border: 2px solid white;
+  text-align: center;
+  max-width: 180px;
+}
+
+.custom-windy-popup .leaflet-popup-content-wrapper {
+  background-color: #2c3e50;
+  color: white;
+  border: 2px solid white;
+  text-align: center;
+}
+.custom-windy-popup .leaflet-popup-content {
+  margin: 8px 5px 5px 5px;
+}
+
+.custom-windy-popup .leaflet-container a.leaflet-popup-close-button {
+  top: 12px !important;
+  right: 12px !important ;
+}
+
+.custom-tooltip {
+  text-align: center;
+  background-color: #2c3e50;
+  color: white;
+  border: 2px solid white;
+}
+
+.lead-p {
+  font-size: 1.15em;
+}
+
+.fa-arrow-circle-up {
+  color: red;
+}
+
+.fa-arrow-circle-down {
+  color: blue;
+}
+
+#modalWikiBox .modal-dialog,
+#modalWikiBox .modal-content {
+  /* max-height: calc(100vh - 115px); */
+  height: 80%;
+}
+
+#modalWikiBox .modal-body {
+  overflow-y: scroll;
+}
+
+iframe {
+  border-top: 2px solid black;
+  height: 33vh;
+  
+}
+
+.countryImages {
+  max-width: 100%;
+  height: 350px;
+  display: block;
+  margin: 0 auto;
+  border: solid 2px rgb(68, 66, 66);
+}
+
+@media screen and (max-width: 768px) {
+  #appName {
+    display: none;
+  }
+}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Geonames api fetching</title>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -11,7 +11,7 @@
 
     <header id="header">
 
-        <h1>API Compiler</h1>
+        <h1>Geonames Data</h1>
 
     </header>
 
@@ -23,30 +23,59 @@
         <table>
             <tr id="table-header">
                 <td>API Name</td>
-                <td>API Description</td>
-                <td></td>
+                <td>User Input</td>
+                
             </tr>
             <tr class="api-info">
-                <td>1.Neighbouring countries:</td>
+                <td>1. Neighboring countries:</td>
                 <td>
                     <form id="countryForm">
-                        <input type="text" id="countryInput" name="country" placeholder="Enter Country Code">
-                        <button type="submit" id="fetchDataButton">Submit</button>
+                        <input type="text" id="countryInput" name="country" placeholder="Enter Country Name">
+                        <button type="button" id="fetchDataButton">Submit</button>
                     </form>
                 </td>
-                <td></td>
+                
             </tr>
             <tr class="api-info">
-                <td>2.{name}</td>
-                <td>description</td>
-                <td><button>Submit</button></td>
+                <td>2. Country Regions:</td>
+                <td>
+                    <input type="text" id="countryInput2" name="country2" placeholder="Enter Country/Region">
+                    <button type="button" id="fetchCountryRegionsButton">Submit</button>
+                </td>
+                
             </tr>
             <tr class="api-info">
-                <td>3.{name}</td>
-                <td>description</td>
-                <td><button>Submit</button></td>
+                <td>3. Lattitude & Longitude:</td>
+                <td>
+                    <form id="LatLngForm">
+                        <input type="text" id="countryInput3" name="country" placeholder="Enter Place Name">
+                        <button type="button" id="fetchLatLngButton">Submit</button>
+                    </form>
+                </td>
+                
+            </tr>
+            <tr class="api-info">
+                <td>4. TimeZone:</td>
+                <td>
+                    <form id="timezoneForm">
+                        <input type="text" id="LatInput" name="Latitude" placeholder="Enter Latitude">
+                        <input type="text" id="LngInput" name="Longitude" placeholder="Enter Longitude">
+                        <button type="button" id="fetchTimezoneButton">Submit</button>
+                    </form>
+                </td>
+                
             </tr>
             <tr id="results">
+                <td colspan="3"></td>
+            </tr>
+            </tr>
+            <tr id="countryRegionsResults">
+                <td colspan="3"></td>
+            </tr>
+            <tr id="LatLngResult">
+                <td colspan="3"></td>
+            </tr>
+            <tr id="timezoneResult">
                 <td colspan="3"></td>
             </tr>
 
