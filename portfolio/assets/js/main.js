@@ -88,10 +88,8 @@
     onscroll(document, toggleBacktotop)
   }
 
-  document.getElementById("downloadButton").addEventListener("click", function() {
-    var downloadLink = document.getElementById("downloadLink");
-    downloadLink.click();
-  });
+
+  
 
   /**
    * Mobile nav toggle
@@ -265,3 +263,11 @@
   new PureCounter();
 
 })()
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("downloadButton").addEventListener("click", function() {
+    var downloadLink = document.getElementById("downloadLink");
+    downloadLink.click();
+  });
+});
