@@ -69,7 +69,7 @@
   <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
     <div class="hero-container" data-aos="fade-in">
       <h1>Wilfred Bridges</h1>
-      <p> I'm <span class="typed" data-typed-items="Designer, Developer, Freelancer, Teacher"></span></p>
+      <p> I'm <span class="typed" data-typed-items="Full-Stack Engineer, Developer, Teacher, Learner"></span></p>
     </div>
   </section><!-- End Hero -->
 
@@ -81,7 +81,7 @@
 
         <div class="section-title">
           <h2>About</h2>
-          <p>Hello! I'm Wilfred, a Software Developer with a mathematics teaching background.</p>
+          <p>Hello! I'm Wilfred, a Full-Stack Engineer with a mathematics teaching background.</p>
         </div>
 
         <div class="row">
@@ -156,6 +156,12 @@
               </div>
             </div>
 
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+              <div class="skill">
+                <img src="./assets/img/jquery.svg" alt="HTML" width="48" height="48" style="fill: #E44D26;"/> jQuery
+              </div>
+            </div>
+
           </div>
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
@@ -187,6 +193,12 @@
             <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
               <div class="skill">
                 <img src="./assets/img/python-svgrepo-com.svg" alt="HTML" width="48" height="48" style="fill: #E44D26;"/> Python
+              </div>
+            </div>
+
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+              <div class="skill">
+                <img src="./assets/img/vscode.svg" alt="HTML" width="48" height="48" style="fill: #E44D26;"/> VSCode
               </div>
             </div>
 
@@ -244,19 +256,15 @@
                 <li>Head of grade 6. Managing of grade 6 teachers and control administrative duties as grade head. Identify slow progress of students and collaborate to provide valuable support and solutions. Effective communication with peers and parents about student progress. , Led effective and insightful parent’s evenings. </li>
               </ul>
             </div>
-            <div class="resume-item">
-              <h4>Graphic design specialist</h4>
-              <h5>2017 - 2018</h5>
-              <p><em>Stepping Stone Advertising, New York, NY</em></p>
-              <ul>
-                <li>Developed numerous marketing programs (logos, brochures,infographics, presentations, and advertisements).</li>
-                <li>Managed up to 5 projects or tasks at a given time while under pressure</li>
-                <li>Recommended and consulted with clients on the most appropriate graphic design</li>
-                <li>Created 4+ design presentations and proposals a month for clients and account managers</li>
-              </ul>
-            </div>
+
           </div>
         </div>
+
+        <div class="text-center ">
+          <a id="downloadLink" href="/WilfredBridgesCV.pdf" style="display: none" download>Download PDF</a>
+          <button id="downloadButton" class='pdf-button' type="button">Download CV</button>
+        </div>
+        
 
       </div>
     </section><!-- End Resume Section -->
@@ -267,33 +275,61 @@
 
         <div class="section-title">
           <h2>Portfolio</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          
         </div>
 
-        <div class="row" data-aos="fade-up">
-          <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="portfolio-flters">
-              <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-app">App</li>
-              <li data-filter=".filter-card">Card</li>
-              <li data-filter=".filter-web">Web</li>
-            </ul>
-          </div>
-        </div>
+        
 
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+          <div class="col-lg-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+              <img src="assets/img/portfolio/Project1B.png" class="img-fluid" alt="" >
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                <a href="assets/img/portfolio/Project1B.png" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Gazetteer"><i class="bx bx-plus"></i></a>
+                <a href="https://wilfredbridges.co.uk/wilfredBridges/project1/" title="Live-Demo" target="blank"><i class="fas fa-play"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 portfolio-item filter-app">
+            <div class="portfolio-description">
+              <h3>Gazetteer</h3>
+              <p>Gazetteer is an interactive web app designed to work on mobile and desktop and allows users to access information about any country.
+                 The app calls a wide range of APIs to make a diverse set of information available to the user. 
+                 I used AJAX calls to PHP routines, using cURL to retrieve information from the API, and then formatted the JSON response to display the information to the user.
+                  For example, the app shows general information about the selected country in a set of modals.
+                   It also uses the Leaflet library to display overlays onto the map showing interesting location-specific details</p>
+              <div class="technologies">
+                <h5> JavaScript / jQuery / PHP / Leaflet.js</h5>
               </div>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+          <div class="col-lg-6 portfolio-item filter-web">
+            <div class="portfolio-wrap">
+              <img src="assets/img/portfolio/CreateAPlaylist.png" class="img-fluid" alt="">
+              <div class="portfolio-links">
+                <a href="assets/img/portfolio/CreateAPlaylist.png" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Create-A-Playlist"><i class="bx bx-plus"></i></a>
+                <a href="https://create-playlist.surge.sh/" title="Live-Demo" target="blank"><i class="fas fa-play"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 portfolio-item filter-web">
+            <div class="portfolio-description">
+              <h3>Create-A-Playlist</h3>
+              <p>One of my first React aplications. This app lets you create custom playlists on Spotify.
+                You can search for artists, songs or albums and select your favourite songs to add to your new playlist. 
+                You will have the option to previev a snippet of the song before adding it to your playlist.
+                This app uses the Spotify api. You will need an active Spotify account to access the features of this app.
+              </p>
+              <div class="technologies">
+                <h5> React / Restfullapi / Surge</h5>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-lg-6 portfolio-item filter-web">
             <div class="portfolio-wrap">
               <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
               <div class="portfolio-links">
@@ -302,76 +338,45 @@
               </div>
             </div>
           </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 2"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+          <div class="col-lg-6 portfolio-item filter-web">
+            <div class="portfolio-description">
+              <h3>Project Title 2</h3>
+              <p>Project description for the second portfolio item. You can provide a detailed description of your project here.</p>
+              <div class="technologies-used">
+                <h5>Technologies Used:</h5>
+                <ul>
+                  <li>HTML</li>
+                  <li>CSS</li>
+                  <li>JavaScript</li>
+                </ul>
               </div>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+          <div class="col-lg-6 portfolio-item filter-web">
             <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
+              <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 2"><i class="bx bx-plus"></i></a>
+                <a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
                 <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 portfolio-item filter-web">
+            <div class="portfolio-description">
+              <h3>Project Title 2</h3>
+              <p>Project description for the second portfolio item. You can provide a detailed description of your project here.</p>
+              <div class="technologies-used">
+                <h5>Technologies Used:</h5>
+                <ul>
+                  <li>HTML</li>
+                  <li>CSS</li>
+                  <li>JavaScript</li>
+                </ul>
               </div>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 2"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 1"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
 
         </div>
 

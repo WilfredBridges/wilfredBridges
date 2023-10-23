@@ -8,7 +8,7 @@ require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
 $mail = new PHPMailer(true);
-$successMessage = '';  
+
 
 try {
     // Server settings
@@ -36,12 +36,10 @@ try {
     $mail->Body = $emailBody;
 
     $mail->send();
-    $successMessage = 'Message has been sent';  
+
+    // Echo 'OK' upon successful send
+    echo 'OK';
 } catch (Exception $e) {
-    
-    $successMessage = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    echo "Message could not be sent.";
 }
-
-
-echo $successMessage;
 ?>
