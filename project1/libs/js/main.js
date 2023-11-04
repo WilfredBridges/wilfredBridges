@@ -67,19 +67,21 @@ let map = L.map('map', {
 
 // Display Zoom, Location and Layer Buttons
 
-// L.control.scale({ position: 'bottomright', imperial: false }).addTo(map)
+L.control.scale({ position: 'bottomright', imperial: false }).addTo(map)
 
-L.control
-  .zoomslider({
-    position: 'bottomright',
-  })
-  .addTo(map)
+L.control.zoom({ position: 'topright' }).addTo(map);
+
+// L.control
+//  .zoomControl({
+//    position: 'bottomright',
+//   })
+//    .addTo(map)
 
 let layerControl = L.control.layers(objBasemaps, overlayMaps).addTo(map)
 layerControl.setPosition('topright');
 
 let locationBtn = L.easyButton(
-  'fa-light fa-home',
+  'fa-solid fa-home',
   function () {
     getLocation()
   },
@@ -93,7 +95,7 @@ let locationBtn = L.easyButton(
 // Buttons
 
 let countryInfoBtn = L.easyButton(
-  'fas fa-info',
+  'fa-solid fa-info',
   function () {
     $('.txtCountry').html($('#selectCountry option:selected').text())
     getCountryInfo()
@@ -105,7 +107,7 @@ let countryInfoBtn = L.easyButton(
   .addTo(map)
 
 let weatherBtn = L.easyButton(
-  'fas fa-cloud-sun',
+  'fa-solid fa-cloud-sun',
   function () {
     $('#resetWeather').trigger('click')
     $('#modalWeatherBox').modal('show')
@@ -114,7 +116,7 @@ let weatherBtn = L.easyButton(
 ).addTo(map)
 
 let wikiInfoBtn = L.easyButton(
-  'fab fa-wikipedia-w',
+  'fa-solid fa-wikipedia-w',
   function () {
     getWikiInfo()
     $('#modalWikiBox').modal('show')
@@ -124,7 +126,7 @@ let wikiInfoBtn = L.easyButton(
 
 // Images Button
 let imagesBtn = L.easyButton(
-  'fa fa-camera', 
+  'fa-solid fa-image', 
   function () {
     $('.txtCountry').html($('#selectCountry option:selected').text())
     getImages(); 
@@ -136,7 +138,7 @@ let imagesBtn = L.easyButton(
 // Exchange Rate Button
 
 let ExchangeButton = L.easyButton(
-  'fa fa-dollar-sign', 
+  'fa-solid fa-dollar-sign', 
   function() {
     getExchangeRates();
     $('#amountInput').val(1);
@@ -755,10 +757,7 @@ map.on('popupopen', function (e) {
   }
 })
 
-var ctlMeasure = L.control.polylineMeasure({
-  position: 'topleft',
-  measureControlTitle: 'Measure Lenght'
-}).addTo(map);
+
 
 /////////////////////////////////////////////// MODAL BUTTONS /////////////////////////////////////////////////////////////
 
