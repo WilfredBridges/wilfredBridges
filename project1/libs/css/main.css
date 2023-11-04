@@ -69,15 +69,26 @@
 
 .fa-wikipedia-w,
 .fa-dollar-sign,
-.fa-camera,
+.fa-image,
 .fa-info,
 .fa-pound-sign,
 .fa-cloud-sun,
 .fa-compass,
 .fa-home {
   line-height: 3rem;
+  
 }
+
+.fa-cloud-sun,
+.fa-wikipedia-w,
+.fa-dollar-sign,
 .fa-info,
+.fa-image {
+  padding-top: 10px;
+}
+
+.fa-info,
+.fa-wikipedia-w,
 .fa-pound-sign,
 .fa-dollar-sign,
 .fa-cloud-sun,
@@ -85,9 +96,9 @@
 .fa-home {
   font-size: 1.5rem;
 }
-.fa-wikipedia-w,
-.fa-camera {
-  font-size: 1.5rem;
+
+.fa-image {
+  font-size: 1.75rem;
 }
 
 @media only screen and (min-width: 759px) {
@@ -107,7 +118,7 @@
   }
 
   .fa-wikipedia-w,
-  .fa-camera,
+  .fa-image,
   .fa-info,
   .fa-pound-sign,
   .fa-dollar-sign,
@@ -117,10 +128,11 @@
   }
   .fa-info,
   .fa-pound-sign,
-  .fa-dollar-sign,
+  
   .fa-cloud-sun {
     font-size: 35px;
   }
+  .fa-dollar-sign,
   .fa-wikipedia-w {
     font-size: 32px;
   }

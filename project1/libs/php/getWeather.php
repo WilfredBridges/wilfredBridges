@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 $executionStartTime = microtime(true);
 
 $url = 'api.openweathermap.org/data/2.5/weather?q=' . $_POST['citysearch'] . ',' . $_POST['countrycode'] . '&units=metric&appid=2ce944bf11212e13b7ae076d863ce1ce';
-// $url = 'api.openweathermap.org/data/2.5/forecast?q=' . $_POST['citysearch'] . ',' . $_POST['countrycode'] . '&units=metric&appid=2ce944bf11212e13b7ae076d863ce1ce';
+
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
