@@ -146,7 +146,9 @@ let ExchangeButton = L.easyButton(
       getExchangeRates();
     });
     $('#currencyModal').modal('show');
-}).addTo(map);
+},
+'Exchange Rate'
+).addTo(map);
 
 
 
@@ -346,7 +348,7 @@ function getOverlays() {
               webcams = L.marker([lat, lng], { icon: camIcon })
 
               webcams
-                .bindTooltip('<b>' + city + '</b><br>' + '(' + lat.toFixed(4) + ', ' + lng.toFixed(4) + ')', {
+                .bindTooltip('<b>' + city + '</b>', {
                   direction: 'top',
                   className: 'custom-tooltip',
                 })
@@ -356,11 +358,7 @@ function getOverlays() {
                 '<b>' +
                   city +
                   '</b><br>' +
-                  '(' +
-                  lat.toFixed(4) +
-                  ', ' +
-                  lng.toFixed(4) +
-                  ')<hr class="m-2">' +
+                  '<hr class="m-2">' +
                   `<div class="webcam"><iframe title="${city} webcam" src=${webcam}></iframe><div>`,
                 { className: 'custom-windy-popup' }
               )
@@ -489,7 +487,7 @@ function getOverlays() {
                 cities = L.marker([lat, lng], { icon: citiesIcon })
 
                 cities
-                  .bindTooltip('<b>' + result.data.geonames[i].name + '</b><br>' + '(' + lat.toFixed(4) + ', ' + lng.toFixed(4) + ')', {
+                  .bindTooltip('<b>' + result.data.geonames[i].name + '</b>', {
                     direction: 'top',
                     className: 'custom-tooltip',
                   })
@@ -499,11 +497,7 @@ function getOverlays() {
                   '<b>' +
                     result.data.geonames[i].name +
                     '</b><br>' +
-                    '(' +
-                    lat.toFixed(4) +
-                    ', ' +
-                    lng.toFixed(4) +
-                    ')<hr class="m-2">' +
+                    '<hr class="m-2">' +
                     'Population: ' +
                     pop +
                     '<br>' +
@@ -568,12 +562,7 @@ function getOverlays() {
               }
 
               layer.bindTooltip(
-                '<b>Hotel</b><br>' +
-                  '(' +
-                  feature.geometry.coordinates[1].toFixed(4) +
-                  ', ' +
-                  feature.geometry.coordinates[0].toFixed(4) +
-                  ')',
+                '<b>' + titleCase(feature.properties.name) + '</b>',
                 { direction: 'top', className: 'custom-tooltip' }
               )
 
@@ -663,12 +652,7 @@ function getOverlays() {
               }
 
               layer.bindTooltip(
-                '<b>Fuel</b><br>' +
-                  '(' +
-                  feature.geometry.coordinates[1].toFixed(4) +
-                  ', ' +
-                  feature.geometry.coordinates[0].toFixed(4) +
-                  ')',
+                '<b>' + titleCase(name(feature.properties.name)) + '</b>',
                 { direction: 'top', className: 'custom-tooltip' }
               )
 
