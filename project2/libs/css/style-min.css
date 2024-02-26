@@ -1,16 +1,20 @@
 :root {
-  --primarycolor: #1aa152;
+  --primarycolor: #007bff; /* Updated to a more vibrant blue */
   --lightprimarycolor: #9ad0ec;
-  --black: #161616;
-  --darkgrey: #3a3a3a;
+  --black: #212529; /* Slightly lighter black for better readability */
+  --darkgrey: #343a40; /* Bootstrap's dark grey for consistency */
+  --backgroundcolor: #f8f9fa; /* Light background for better contrast */
 }
 html {
   height: 100%;
 }
 body {
-  font-family: "Open Sans", sans-serif;
-  background: #eee;
+  font-family: "Nunito", sans-serif; /* Changed to Nunito for a more modern look */
+  background: var(--backgroundcolor);
   height: 100%;
+  margin: 0;
+  font-size: 0.9rem; /* Adjusted for better readability */
+  line-height: 1.6;
 }
 body a {
   text-decoration: none;
@@ -99,6 +103,7 @@ body a {
   z-index: 997;
   transition: all 0.5s;
   background: var(--primarycolor);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #nav .navbar-nav button {
@@ -134,6 +139,10 @@ body a {
   box-shadow: none;
   border: 1px solid var(--primarycolor);
 }
+.search input,
+.form-control {
+  border-radius: 0.25rem; /* Consistent border-radius */
+}
 .search button {
   position: absolute;
   top: 2px;
@@ -168,6 +177,10 @@ section {
   background-image: none;
 }
 
+.btn {
+  border-radius: 0.25rem;
+}
+
 .add-button button {
   background: green;
   color: #fff;
@@ -182,9 +195,15 @@ section {
 .table {
   border-radius: 8px;
   overflow: hidden;
+  color: var(--black);
 }
 .table tbody {
   background: #fff;
+}
+
+.table thead th {
+  background-color: var(--primarycolor);
+  color: #fff;
 }
 
 .employeeTable tbody tr:hover {
@@ -271,6 +290,15 @@ section {
   font-size: 12px;
 }
 
+.modal-content {
+  border-radius: 0.3rem;
+}
+
+.modal-header {
+  background: var(--primarycolor);
+  color: #fff;
+}
+
 #deletelocationModal .modal-content {
   padding: 15px 10px 0 10px;
 }
@@ -278,6 +306,13 @@ section {
 .modal-title {
   margin-right: 5px;
 }
+
+.form-control,
+.form-select {
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+}
+
 .back-to-top {
   position: fixed;
   visibility: hidden;
@@ -314,6 +349,15 @@ section {
   }
   .container.table-responsive {
     padding: 3px !important;
+  }
+
+  .navbar-nav {
+    margin-top: 20px;
+  }
+
+  .search,
+  .add-button {
+    margin-bottom: 20px;
   }
 }
 @media screen and (max-width: 400px) {
